@@ -14,6 +14,6 @@ router.get('/showStore', reviewController.showStore_get);
 // //post reviews
 router.post('/createReview', reviewController.createReview_post);
 
-router.get('/', reviewController.home_get);
+router.get('/search', reviewController.search_get);
 
 module.exports = router;

@@ -19,27 +19,31 @@ module.exports.createReview_post = (req, res) =>{
 
 }
 
-module.exports.home_get = async (req, res) => {
-    let query = Store.find()
-    
-    if(req.query.search != null && req.query.search != ''){
-        query = query.regex('store', new RegExp(req.query.search, 'i'))
-        
-    }
+module.exports.search_get = async (req, res, hasErrors = false) => {
 
-    console.log('this is the query ' + req.query.search) 
-    try {
-        const store = await query.exec()
+    let query = Store.find()
+
+    if (req.query.search != null && req.query.search != '') {
+
+        query = query.regex('name', new RegExp(req.query.search, 'i'))
         
-        res.render('home', {
-        name:store,
-        searchOptions:req.query
-        })
-        console.log('searching..')
-        
-    } catch (err){
-        console.log(err)
-        res.redirect('login')
     }
-    
+  
+    try {
+        
+        const stores = await query.exec()
+        if (stores == '') {
+            console.log('no stores available')
+            res.render('createStore')
+        } else {
+                console.log( stores)
+                res.render('ShowStore',  {
+                stores:stores
+            })
+        }
+       
+
+    } catch (error) {
+        console.log(error)
+    }
 }
