@@ -2,9 +2,8 @@ const mongoose = require('mongoose');
 
 
 const storeSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: [true, 'Please enter Store name'],
+  storeName: {
+    type: String
   },
   reviews: {
     type: String

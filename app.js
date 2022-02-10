@@ -5,6 +5,7 @@ const reviewRoutes = require('./routes/reviewRoutes');
 const cookieParser = require('cookie-parser');
 const { requireAuth, checkUser } = require('./middleware/authMiddleware');
 const res = require('express/lib/response');
+const bodyParser = require('body-parser')
 
 const app = express();
 
@@ -12,6 +13,8 @@ const app = express();
 app.use(express.static('public'));
 app.use(express.json());
 app.use(cookieParser());
+app.use(express.urlencoded({ extended: true}))
+app.use(bodyParser.urlencoded({extended: true}))
 
 // view engine
 app.set('view engine', 'ejs');

@@ -7,7 +7,23 @@ module.exports.createStore_get = (req, res) => {
     res.render('createStore');
 }
 
-module.exports.createStore_post = (req, res) => {
+module.exports.createStore_post = async (req, res) => {
+   
+    const storename = req.body.name
+    const store = new Store({
+        storeName: storename
+    })
+
+    try {
+        const newStore = await store.save()
+        console.log(newStore)
+        res.render('showStore', {
+            storeId: newStore._id
+        })
+    } catch (error) {
+        res.render('createStore')
+        console.log(error)
+    }
 
 }
 
@@ -23,7 +39,7 @@ module.exports.search_get = async (req, res, hasErrors = false) => {
 
     let query = Store.find()
 
-    if (req.query.search != null && req.query.search != '') {
+    if (req.query.search != null || req.query.search != '') {
 
         query = query.regex('name', new RegExp(req.query.search, 'i'))
         
@@ -34,7 +50,7 @@ module.exports.search_get = async (req, res, hasErrors = false) => {
         const stores = await query.exec()
         if (stores == '') {
             console.log('no stores available')
-            res.render('createStore')
+            res.redirect('createStore')
         } else {
                 console.log( stores)
                 res.render('ShowStore',  {
