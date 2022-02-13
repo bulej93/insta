@@ -1,1 +1,14 @@
-<%= storeId %>
+<%- include('partials/header'); -%>
+
+
+<div>
+    <% stores.forEach(store => { %>
+        <div> <%= store.name %> </div>
+   <% }) %>
+</div>
+
+
+
+
+
+<%- include('partials/footer'); -%>
