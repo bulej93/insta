@@ -31,8 +31,32 @@ module.exports.showStore_get = (req, res) => {
     res.render('showStore');
 }
 
-module.exports.createReview_post = (req, res) =>{
+module.exports.createReviewId_put = async (req, res) =>{
+    const id = req.params.id
+    const review = req.body.name
 
+    console.log('this is the body ' + review)
+
+
+    try {
+		const stores = await Store.findByIdAndUpdate(id, review)
+		res.render('reviews', {stores : stores})
+	} catch(err){
+		console.log(err)
+        res.render('showStore')
+	}
+
+}
+
+module.exports.showStoreId_get = async (req, res) => {
+    const id = req.params.id
+	try {
+		const stores = await Store.findById(id)
+		res.render('reviews', {stores : stores})
+	} catch(err){
+		console.log(err)
+        res.render('showStore')
+	}
 }
 
 module.exports.search_get = async (req, res) => {
@@ -48,8 +72,7 @@ module.exports.search_get = async (req, res) => {
     try {
         
         const stores = await Store.find({storeName:searchOptions.name})
-        console.log('this is stores alone' + stores)
-        res.render('createStore', {
+        res.render('showStore', {
             stores : stores,
             searchOptions: req.query
         })

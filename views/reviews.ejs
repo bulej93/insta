@@ -1,0 +1,21 @@
+<%- include('partials/header'); -%>
+
+<%= stores.storeName %>
+
+<form class="form" action="/reviews/<%= stores._id%>" method="GET">
+    <h2>Leave a review</h2>
+    <textarea type="text" name="review" rows="4" cols="40" ></textarea>
+    <button class="btn-Up"> Submit</button>
+  </form>
+
+  <div class="review-list">
+      <% if(stores.reviews != null){ %>
+        <%= stores.reviews %>
+     <% } else { %>
+     <li>no reviews yet, be the first to add one</li>
+        <% } %>
+  </div>
+
+
+
+<%- include('partials/footer'); -%>

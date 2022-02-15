@@ -8,11 +8,14 @@ const router = Router();
 //  //actually create the store
  router.post('/createStore', reviewController.createStore_post);
 
-// //get store and show current reviews
+// get store from search results
 router.get('/showStore', reviewController.showStore_get);
 
+// get store with ._id where you can post reviews
+router.get('/showStore/:id', reviewController.showStoreId_get);
+
 // //post reviews
-router.post('/createReview', reviewController.createReview_post);
+router.get('/reviews/:id', reviewController.createReviewId_put);
 
 router.get('/search', reviewController.search_get);
 
