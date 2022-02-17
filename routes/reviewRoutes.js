@@ -15,7 +15,7 @@ router.get('/showStore', reviewController.showStore_get);
 router.get('/showStore/:id', reviewController.showStoreId_get);
 
 // //post reviews
-router.get('/reviews/:id', reviewController.createReviewId_put);
+router.post('/:id', reviewController.createReviewId_put);
 
 router.get('/search', reviewController.search_get);
 

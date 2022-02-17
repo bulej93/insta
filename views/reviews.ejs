@@ -2,9 +2,9 @@
 
 <%= stores.storeName %>
 
-<form class="form" action="/reviews/<%= stores._id%>" method="GET">
+<form class="form" action="/<%= stores._id%>?" method="POST">
     <h2>Leave a review</h2>
-    <textarea type="text" name="review" rows="4" cols="40" ></textarea>
+    <textarea type="text" name="name" rows="4" cols="40" ></textarea>
     <button class="btn-Up"> Submit</button>
   </form>
 

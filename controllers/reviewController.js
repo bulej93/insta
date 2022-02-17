@@ -33,13 +33,14 @@ module.exports.showStore_get = (req, res) => {
 
 module.exports.createReviewId_put = async (req, res) =>{
     const id = req.params.id
-    const review = req.body.name
-
-    console.log('this is the body ' + review)
-
+    let stores
 
     try {
-		const stores = await Store.findByIdAndUpdate(id, review)
+		const stores = await Store.findById(id)
+        stores.reviews = req.body.name
+        console.log(stores.reviews)
+        await stores.save()
+        console.log('saved')
 		res.render('reviews', {stores : stores})
 	} catch(err){
 		console.log(err)

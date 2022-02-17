@@ -5,9 +5,7 @@ const storeSchema = new mongoose.Schema({
   storeName: {
     type: String
   },
-  reviews: {
-    type: String
-  }
+  reviews:[String]
 });
 
 
