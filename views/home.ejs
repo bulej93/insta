@@ -16,7 +16,9 @@
    
   </div>
   <div class="review-list">
-    <li>this is a review </li>
+    <% reviews.forEach(review => { %>
+      <li> <%= review.reviews %> </li>
+     <% }) %>
     
   </div>
 </header>

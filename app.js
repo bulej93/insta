@@ -7,6 +7,7 @@ const { requireAuth, checkUser } = require('./middleware/authMiddleware');
 const res = require('express/lib/response');
 const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
+const Reviews = require('./models/Reviews');
 
 const app = express();
 
@@ -29,7 +30,12 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true, useCr
 
 // routes
 app.get('*', checkUser);
-app.get('/', (req, res) => res.render('home'));
+app.get('/', async (req, res) =>{ 
+  const reviews = await Reviews.find({}).limit(3)
+  res.render('home', {
+    reviews : reviews
+  })
+});
 app.get('/smoothies', requireAuth, (req, res) => res.render('smoothies'));
 app.use(authRoutes);
 app.use(reviewRoutes);

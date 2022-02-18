@@ -1,4 +1,5 @@
 const Store = require("../models/Store");
+const Reviews = require("../models/Reviews");
 const jwt = require('jsonwebtoken');
 
 
@@ -36,12 +37,13 @@ module.exports.createReviewId_put = async (req, res) =>{
     let stores
 
     try {
-		const stores = await Store.findById(id)
-        stores.reviews = req.body.name
-        console.log(stores.reviews)
-        await stores.save()
-        console.log('saved')
-		res.render('reviews', {stores : stores})
+        const review = new Reviews({
+            store:id,
+            reviews: req.body.name
+        })
+        await review.save()
+        console.log('saved' + review)
+		res.redirect('showStore')
 	} catch(err){
 		console.log(err)
         res.render('showStore')
@@ -53,7 +55,11 @@ module.exports.showStoreId_get = async (req, res) => {
     const id = req.params.id
 	try {
 		const stores = await Store.findById(id)
-		res.render('reviews', {stores : stores})
+        const reviews = await Reviews.find({store:[id]}, function(err, docs){})
+		res.render('reviews', {
+            stores : stores,
+            reviews : reviews
+        })
 	} catch(err){
 		console.log(err)
         res.render('showStore')
