@@ -33,8 +33,10 @@ module.exports.showStore_get = (req, res) => {
 }
 
 module.exports.createReviewId_put = async (req, res) =>{
-    const id = req.params.id
-    let stores
+    let id = req.params.id
+    let store
+
+    store = await Store.findById(id)
 
     try {
         const review = new Reviews({
@@ -43,7 +45,7 @@ module.exports.createReviewId_put = async (req, res) =>{
         })
         await review.save()
         console.log('saved' + review)
-		res.redirect('showStore')
+		res.redirect(`/showstore/${store.id}`)
 	} catch(err){
 		console.log(err)
         res.render('showStore')
@@ -55,7 +57,7 @@ module.exports.showStoreId_get = async (req, res) => {
     const id = req.params.id
 	try {
 		const stores = await Store.findById(id)
-        const reviews = await Reviews.find({store:[id]}, function(err, docs){})
+        const reviews = await Reviews.find({store:[id]}, function(err, docs){}).sort({createdAt: -1})
 		res.render('reviews', {
             stores : stores,
             reviews : reviews

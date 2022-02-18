@@ -11,7 +11,15 @@
   <div class="review-list">
     
     <% reviews.forEach(review => { %>
-     <li> <%= review.reviews %> </li>
+     <li>
+        <%= review.reviews %> </br>
+        <div class="time-created">
+         <p>posted on: <%= review.createdAt %> </p>
+        </div>
+        
+    
+    </li>
+
     <% }) %>
   
   </div>
