@@ -195,3 +195,29 @@ width: 550px;
   font-size: small;
   font-weight: 500;
 }
+
+@media all and (max-width: 500px) {
+  nav {
+  margin-bottom: 120px;
+  }
+
+  nav li a:hover {
+    text-align: center;
+  }
+
+  .btn{
+    width: 75px;
+  }
+
+  .headings input {
+    width: fit-content;
+  }
+   .headings button {
+     width: 100px;
+     margin-left: 120px;
+   }
+
+   .review-list li{
+     width: 280px;
+   }
+}
