@@ -2,9 +2,12 @@
 
 
 <div>
+    <p>cant see what you're looking for <a href="/createStore">CLICK HERE to create store</a> </p>
     <% stores.forEach(store => { %>
+        
         <div><a href="showstore/<%= store._id %>" ><%= store.storeName %></a> </div>
    <% }) %>
+   
 </div>
 
 
