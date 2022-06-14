@@ -1,9 +1,9 @@
 <%- include('partials/header'); -%>
 
-<%= stores.storeName %>
+
 
 <form class="form" action="/<%= stores._id%>?" method="POST">
-    <h2>Leave a review</h2>
+    <h3>Leave a review for <h2><%= stores.storeName %></h2></h3>
     <textarea type="text" name="name" rows="4" cols="40" ></textarea>
     <button class="btn-Up"> Submit</button>
   </form>
