@@ -9,20 +9,21 @@ module.exports.createStore_get = (req, res) => {
 }
 
 module.exports.createStore_post = async (req, res) => {
-   
+    let id = req.params.id
     const storename = req.body.name
+
     const store = new Store({
         storeName: storename
     })
 
     try {
         const newStore = await store.save()
+        let id = req.params.id
+        const stores = await Store.findById(id)
         console.log(newStore)
-        res.render('showStore', {
-            storeId: newStore._id
-        })
+        res.redirect(`/showstore/${store.id}`)
     } catch (error) {
-        res.render('/')
+        res.redirect('/')
         console.log(error)
     }
 

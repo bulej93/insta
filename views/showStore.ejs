@@ -2,10 +2,17 @@
 
 
 <div>
-    <p>cant see what you're looking for <a href="/createStore">CLICK HERE to create store</a> </p>
+    <h1>cant see what you're looking for <a href="/createStore">CLICK HERE to create store</a> </h1><br>
     <% stores.forEach(store => { %>
         
-        <div><a href="showstore/<%= store._id %>" ><%= store.storeName %></a> </div>
+        <h4>
+            <div class="review-list">
+                <li>
+                    <a href="showstore/<%= store._id %>" ><%= store.storeName %></a>
+                </li> 
+            </div>
+        </h4>
+        
    <% }) %>
    
 </div>
